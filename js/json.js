@@ -15,13 +15,13 @@ try {
 }
 let title
 loadNews()
-loading(01)
+loading(01,'Breaking News')
 function displayData(data) {
     const head = document.getElementById('header')
     data.forEach(element => {
         const a = document.createElement('a')
         a.innerHTML = `
-            <a class="anchor btn btn-outline-dark mx-4" onclick="loading(${element.category_id})">${element.category_name}</a>
+            <a class="anchor btn btn-outline-dark mx-4" onclick="loading(${element.category_id},'${element.category_name}')">${element.category_name}</a>
         `
         head.appendChild(a)
     });
@@ -37,28 +37,28 @@ function toggleSpinner(isLoading){
     }
 }
 
-function loading(id) {
+function loading(id,name) {
     toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/0${id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => loaddata(data.data))
+        .then(data => loaddata(data.data,name))
 }
 
-const loaddata = (data) => {
+const loaddata = (data,name) => {
     const div = document.getElementById('news-container')
     div.textContent = ''
     if (data.length == 0) {
         const warning = document.createElement('h3')
         warning.innerHTML = `
-            <h3 class="m-5 text-primary">Sorry! No News found for this section</h3>
+            <h3 class="m-5 text-primary">Sorry! No News found for<span class="text-secondary"> ${name}</span> section</h3>
         `
         div.appendChild(warning)
     }
     else {
         const count = document.createElement('h4')
         count.innerHTML = `
-            <h4 class="my-5 mx-2">${data.length} News available here !</h4>
+            <h4 class="my-5 mx-2">${data.length} News available for <span class="text-success"> ${name} </span> !</h4>
         `
         div.appendChild(count)
     }
