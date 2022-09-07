@@ -1,11 +1,16 @@
-const loadNews=async()=>{
+try {
+    const loadNews=async()=>{
     const link = `https://openapi.programming-hero.com/api/news/categories`
     const res = await fetch(link)
     const data = await res.json()
     displayData(data.data.news_category)
+    }
+}
+catch (error) {
+    console.log(error)
 }
 loadNews()
-loading()
+loading(01)
 function displayData(data) {
     const head = document.getElementById('header')
     data.forEach(element => {
@@ -55,6 +60,7 @@ const loaddata = (data) => {
     }
     data.forEach(element => {
         const news = document.createElement('div')
+        console.log(element)
         news.innerHTML = `
             <div class="row g-2 my-4">
                 <div class="col-md-2 mx-3">
@@ -65,11 +71,19 @@ const loaddata = (data) => {
                             <h5 class="card-title">${element.title}</h5>
                             <p class="details" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="displayModal('${element._id}')">${element.details}</p>
                         </div>
-                        <div class="mt-4 d-flex flex-row">
+                        <div class="mt-4  d-flex flex-row">
                             <img src="${element.author.img}" class="author mx-2">
-                            <div>
+                            <div clss="mr-5">
                                 <h6 class="mb-0">${element.author.name?element.author.name:'No name'}</h6>
-                                <p class="text-secondary">${element.author.published_date}</p>
+                                <p class="text-secondary">${element.author.published_date?element.author.published_date:'No date found'}</p>
+                            </div>
+                            <div class="d-flex flex-row views">
+                                <i class="fa-solid fa-eye-slash ml-5"> </i>
+                                <h6 class="mr-5">&nbsp;${element.total_view?element.total_view:'0'}</h6>
+                            </div>
+                            <div class="ml-5 d-flex flex-row">
+                                <h5 class="rating mt-2">rating: </h5>
+                                <h6 class="mt-2">${element.rating.number}</h6>
                             </div>
                         </div>
                     </div>
@@ -98,6 +112,6 @@ function show_newsModal(data) {
         document.getElementById('modalTitle').innerText = element.title
         document.getElementById('modalDetails').innerText = element.details
         document.getElementById('author').innerText = (element.author.name?element.author.name:'No name')
-        document.getElementById('publish-date').innerText=element.author.published_date
+        document.getElementById('publish-date').innerText=element.author.published_date?element.author.published_date:'No date found'
     });
 }
