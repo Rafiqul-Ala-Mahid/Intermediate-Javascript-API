@@ -1,13 +1,17 @@
-try {
-    const loadNews=async()=>{
+const loadNews=async()=>{
     const link = `https://openapi.programming-hero.com/api/news/categories`
     const res = await fetch(link)
     const data = await res.json()
     displayData(data.data.news_category)
-    }
 }
-catch (error) {
-    console.log(error)
+
+try {
+    loadNewsThrows();
+    loading(id)
+} catch (error) {
+    console.log(error);
+} finally {
+    console.log('We do cleanup here');
 }
 loadNews()
 loading(01)
@@ -79,11 +83,7 @@ const loaddata = (data) => {
                             </div>
                             <div class="d-flex flex-row views">
                                 <i class="fa-solid fa-eye-slash ml-5"> </i>
-                                <h6 class="mr-5">&nbsp;${element.total_view?element.total_view:'0'}</h6>
-                            </div>
-                            <div class="ml-5 d-flex flex-row">
-                                <h5 class="rating mt-2">rating: </h5>
-                                <h6 class="mt-2">${element.rating.number}</h6>
+                                <h6 class="mr-5">&nbsp;${element.total_view?element.total_view:'no views'}</h6>
                             </div>
                         </div>
                     </div>
