@@ -5,26 +5,36 @@ const loadNews=async()=>{
     displayData(data.data.news_category)
 }
 loadNews()
+loading()
 function displayData(data) {
     const head = document.getElementById('header')
-    // console.log(data)
     data.forEach(element => {
         // console.log(element)
         const a = document.createElement('a')
         a.innerHTML = `
-            <a href="#" class="anchor mx-4 refer" onclick="loading(${element.category_id})">${element.category_name}</a>
+            <a href="#" class="anchor mx-4" onclick="loading(${element.category_id})">${element.category_name}</a>
         `
         head.appendChild(a)
     });
 }
+
+function toggleSpinner(isLoading){
+    const loaderSection = document.getElementById('loader')
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    }
+    else {
+        loaderSection.classList.add('d-none')
+    }
+}
+
 function loading(id) {
+    toggleSpinner(true);
     const url = `https://openapi.programming-hero.com/api/news/category/0${id}`
     fetch(url)
         .then(res => res.json())
         .then(data => loaddata(data.data))
 }
-
-
 
 const loaddata = (data) => {
     const div = document.getElementById('news-container')
@@ -44,28 +54,50 @@ const loaddata = (data) => {
         div.appendChild(count)
     }
     data.forEach(element => {
-        console.log(element)
         const news = document.createElement('div')
         news.innerHTML = `
             <div class="row g-2 my-4">
-                    <div class="col-md-2 mx-3">
-                        <img src="${element.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                <div class="col-md-2 mx-3">
+                    <img src="${element.thumbnail_url}" class="img-fluid rounded-start" alt="">
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body">
+                        <div class="">
                             <h5 class="card-title">${element.title}</h5>
-                            <p class="card-text details">${element.details}</p>
+                            <p class="details" data-bs-toggle="modal" data-bs-target="#newsModal" onclick="displayModal('${element._id}')">${element.details}</p>
                         </div>
                         <div class="mt-4 d-flex flex-row">
                             <img src="${element.author.img}" class="author mx-2">
                             <div>
-                                <h6 class="mb-0">${element.author.name}</h6>
+                                <h6 class="mb-0">${element.author.name?element.author.name:'No name'}</h6>
                                 <p class="text-secondary">${element.author.published_date}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         `
         div.appendChild(news)
+    });
+    toggleSpinner(false)
+}
+
+const displayModal = async id => {
+    const news_link = `https://openapi.programming-hero.com/api/news/${id}`
+    const res =await fetch(news_link)
+    const news_data = await res.json()
+    show_newsModal(news_data.data)
+}
+
+function show_newsModal(data) {
+    console.log(data)
+    data.forEach(element => {
+        const d = document.getElementById('modalImg')
+        d.innerHTML = `
+            <img src="${element.image_url}" class="modal-img mb-2">
+        `
+        document.getElementById('modalTitle').innerText = element.title
+        document.getElementById('modalDetails').innerText = element.details
+        document.getElementById('author').innerText = (element.author.name?element.author.name:'No name')
+        document.getElementById('publish-date').innerText=element.author.published_date
     });
 }
