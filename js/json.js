@@ -1,4 +1,5 @@
-const loadNews=async()=>{
+
+const loadNews = async () => {
     const link = `https://openapi.programming-hero.com/api/news/categories`
     const res = await fetch(link)
     const data = await res.json()
@@ -6,22 +7,21 @@ const loadNews=async()=>{
 }
 
 try {
-    loadNewsThrows();
-    loading(id)
+    loading()
 } catch (error) {
     console.log(error);
 } finally {
-    console.log('We do cleanup here');
+    console.log('Congratulations ! No error.');
 }
+let title
 loadNews()
 loading(01)
 function displayData(data) {
     const head = document.getElementById('header')
     data.forEach(element => {
-        // console.log(element)
         const a = document.createElement('a')
         a.innerHTML = `
-            <a href="#" class="anchor mx-4" onclick="loading(${element.category_id})">${element.category_name}</a>
+            <a class="anchor btn btn-outline-dark mx-4" onclick="loading(${element.category_id})">${element.category_name}</a>
         `
         head.appendChild(a)
     });
@@ -64,7 +64,6 @@ const loaddata = (data) => {
     }
     data.forEach(element => {
         const news = document.createElement('div')
-        console.log(element)
         news.innerHTML = `
             <div class="row g-2 my-4">
                 <div class="col-md-2 mx-3">

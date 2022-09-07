@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Blog</title>
+</head>
+<body class="container">
+    <nav class="navbar bg-light my-4">
+        <div class="container-fluid">
+            <a class="navbar-brand">Blog Update</a>
+            <form class="d-flex" role="search">
+                <a href="index.html" id="news" class="btn btn-outline-secondary mx-3">News</a>
+                <a href="blog.html" id="blog" class="btn btn-outline-primary">Blog</a>
+            </form>
+        </div>
+    </nav>
+    <div class="">
+        <h4>1. What are the differences between Var, Let and Const in JavaScript?</h4>
+        <p><u>Ans</u>: <b>Var </b>is functional scope. It can be updated and re-declared into the scope. It can be accessed without initialization as its default value is “undefined”. <b>Let </b>is block scope. It can be updated but cannot be re-declared into the scope. It cannot be accessed without initialization otherwise it will give ‘referenceError’. <b>Const </b>is block scope. It cannot be updated or re-declared into the scope. It cannot be accessed without initialization, as it cannot be declared without initialization.</p>
+    </div>
+    <div>
+        <h4>2. What is difference between regular function and arrow function in JavaScript?</h4>
+        <p><u>Ans</u>: <b>Regular Function </b> created using function declarations or expressions are ‘constructible’ and ‘callable’. Since regular functions are constructible, they can be called using the ‘new’ keyword. However, the arrow functions are only ‘callable’ and not
+        constructible.<b>Arrow Function</b> is a new feature introduced in ES6 – enable writing concise functions in JavaScript. While both regular and arrow functions work in a similar manner, yet there are certain interesting differences between them.</p>
+    </div>
+    <div>
+        <h4>3. Why do we use template string in JavaScript?</h4>
+        <p><u>Ans</u>: <b>Template strings</b> are a powerful feature of modern JavaScript released in ES6. It lets us insert/interpolate variables
+        and expressions into strings without needing to concatenate like in older versions of JavaScript. It allows us to create
+        strings that are complex and contain dynamic elements.</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4"
+    crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c66478c0aa.js" crossorigin="anonymous"></script>
+    <script src="js/json.js"></script>
+</body>
+</html>
