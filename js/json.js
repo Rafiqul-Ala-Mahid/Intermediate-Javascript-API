@@ -44,9 +44,12 @@ function loading(id,name) {
         .then(res => res.json())
         .then(data => loaddata(data.data,name))
 }
-
-const loaddata = (data,name) => {
+const loaddata = (data, name) => {
     const div = document.getElementById('news-container')
+    data.sort((a, b) => {
+        return b.total_view-a.total_view
+    })
+    console.log(data)
     div.textContent = ''
     if (data.length == 0) {
         const warning = document.createElement('h3')
